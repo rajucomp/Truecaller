@@ -38,7 +38,7 @@ we have two information available so far.
 2) And the longest prefix possible from the current node. We get this in constant time since we already built that
    while building our trie.
 
-We can simply return the concatenation if these two values as our answer.
+We can simply return the concatenation of these two values as our answer.
 
 # Example
 Consider these two inputs :\
