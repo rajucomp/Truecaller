@@ -14,7 +14,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTests {
-
     List<String> getPrefixesFromInputFile(String filePath) throws Exception{
         File inputFile = new File(this.getClass().getResource(filePath).getFile());
         //System.out.println("Hello " + inputFile.getAbsolutePath());
