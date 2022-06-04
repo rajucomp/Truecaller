@@ -43,7 +43,7 @@ We can simply return the concatenation if these two values as our answer.
 # Example
 Consider these two inputs :\
 BuildTrie(aaad, aaaad)\
-findLongestPrefix(aaa) returns aaaad.\
+findLongestPrefix(aaa) returns aaaad.
 
 Here, the height of the trie is 5. Our trie will look like this\
 ![Alt text](src/test/resources/org/example/trie.jpg?raw=true "Title")\
@@ -56,20 +56,20 @@ Thus, our answer will be "aaa" + "ad" = "aaaad".
 # Assumptions
 In case of inputs like the below :-\
 BuildTrie(abc, acd)\
-findLongestPrefix(a) can return abc or acd.\
+findLongestPrefix(a) can return abc or acd.
 
 Our solution will return the first prefix from left to right i.e. abc in the list. This can of course be tweaked to 
-return all the strings or the most recent prefix in the list.\
+return all the strings or the most recent prefix in the list.
 
 Let us examine the complexity of our trie operations.\
 BuildTrie(word) -> O(n) where n is the length of the input string.\
-findLongestPrefix(word) -> O(min(n, h)) where n is the length of the string and h is the height of the trie.\
+findLongestPrefix(word) -> O(min(n, h)) where n is the length of the string and h is the height of the trie.
 
-Thus, building the trie from the list will take O(n) * len when len is the number of strings in the list and n is the maximum length among the inputs.\
+Thus, building the trie from the list will take O(n) * len when len is the number of strings in the list and n is the maximum length among the inputs.
 
 Space Complexity :-\
 In the worst case where every prefix is different from each other, \
-we will need n nodes where n is the total number of characters in the input.\
+we will need n nodes where n is the total number of characters in the input.
 
 
 
