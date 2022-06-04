@@ -61,6 +61,8 @@ findLongestPrefix(a) can return abc or acd.
 Our solution will return the first prefix from left to right i.e. abc in the list. This can of course be tweaked to 
 return all the strings or the most recent prefix in the list.
 
+
+# Complexity Analysis
 Let us examine the complexity of our trie operations.\
 BuildTrie(word) -> O(n) where n is the length of the input string.\
 findLongestPrefix(word) -> O(min(n, h)) where n is the length of the string and h is the height of the trie.
