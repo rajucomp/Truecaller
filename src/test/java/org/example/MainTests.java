@@ -7,7 +7,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTests {
-
     @Test
     public void testForCorrectInputs() {
         //Arrange
@@ -17,7 +16,6 @@ public class MainTests {
         input.add("123");
         input.add("12142345");
         input.add("12145");
-
 
         //Act
         AbstractTrie trie = new Trie();
@@ -49,8 +47,6 @@ public class MainTests {
         //Act
         AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
-        //Traversals.Display(trie.getRoot());
-
 
         //Assert
         assertEquals(trie.getLongestPrefix("aaaa"), 4); //4
@@ -70,7 +66,6 @@ public class MainTests {
         AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
 
-
         //Assert
         assertEquals(trie.getLongestPrefix(""), 0); //0
         assertEquals(trie.getLongestPrefix(" "), 0); //0
@@ -89,8 +84,6 @@ public class MainTests {
         //Act
         AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
-        //Traversals.Display(trie.getRoot());
-
 
         //Assert
         assertEquals(0, trie.getLongestPrefix("aaadbhfbhdsaa")); //0
@@ -109,8 +102,6 @@ public class MainTests {
         //Act
         AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
-        //Traversals.Display(trie.getRoot());
-
 
         //Assert
         assertEquals(5, trie.getLongestPrefix("aaa")); //5
@@ -166,11 +157,13 @@ public class MainTests {
         AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
         trie.clear();
+
+        //Assert
         assertEquals(0, trie.getRoot().getSize());
     }
 
     @Test
-    public void testSerialisation() {
+    public void testForValidSerialisation() {
         //Arrange
         List<String> input = new ArrayList<>();
         input.add("aaa");
@@ -189,7 +182,7 @@ public class MainTests {
     }
 
     @Test
-    public void testDeserilaisation() {
+    public void testForValidDeserialisation() {
         //Arrange
         String serialisedTrie = "#[a[a[a[]]]]";
 
@@ -200,4 +193,33 @@ public class MainTests {
         assertNull(trie);
     }
 
+    @Test
+    public void testForNullOrEmptyDeserialisation() {
+        //Arrange
+        String spaceSerialisedTrie = " ";
+        String emptySerialisedTrie = " ";
+        String nullSerialisedTrie = " ";
+
+        //Act
+        AbstractTrie spaceTrie = Traversals.deserialise(spaceSerialisedTrie);
+        AbstractTrie emptyTrie = Traversals.deserialise(emptySerialisedTrie);
+        AbstractTrie nullTrie = Traversals.deserialise(nullSerialisedTrie);
+
+        //Assert
+        assertNull(spaceTrie);
+        assertNull(emptyTrie);
+        assertNull(nullTrie);
+    }
+
+    @Test
+    public void testForNullNodeSerialisation() {
+        //Arrange
+        AbstractTrie nullTrie = new Trie();
+
+        //Act
+        String serialisedTrie = nullTrie.serialise();
+
+        //Assert
+        assertEquals("#[]", serialisedTrie);
+    }
 }

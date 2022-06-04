@@ -87,6 +87,4 @@ public class Trie extends AbstractTrie {
     public void clear() {
         root.setChildren(new HashMap<>());
     }
-
-
 }

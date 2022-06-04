@@ -5,6 +5,9 @@ import java.util.*;
 public class Traversals {
 
     public static String serialise(TrieNode root) {
+        if(root == null) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         sb.append(root.getVal());
         sb.append('[');
@@ -16,6 +19,9 @@ public class Traversals {
     }
 
     public static AbstractTrie deserialise(String serlialisedTree) {
+        if(StringUtilityFunctions.isNullOrEmpty(serlialisedTree)) {
+            return null;
+        }
         AbstractTrie trie = new Trie();
         trie.getRoot().setVal(serlialisedTree.charAt(0));
         return null;
