@@ -22,8 +22,8 @@ to store the longest prefix starting from the current node.
 # Case 1
 The height of the trie is less than the input length. In the case, we return the path traced so far.
 
-Example :- Consider these inputs
-BuildTrie(aaa)
+Example :- Consider these inputs\
+BuildTrie(aaa)\
 findLongestPrefix(aaaa) returns "aaa"
 
 Here, the height of our trie is 3 (excluding the default root node).
