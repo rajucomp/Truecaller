@@ -71,7 +71,7 @@ Thus, building the trie from the list will take O(n) * len when len is the numbe
 
 Space Complexity :-\
 In the worst case where every prefix is different from each other, \
-we will need n nodes where n is the total number of characters in the input.
+we will need n nodes where n is the total number of characters in each string in the list.
 
 
 
