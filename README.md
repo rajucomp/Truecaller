@@ -48,6 +48,8 @@ findLongestPrefix(aaa) returns aaaad.
 
 Here, the height of the trie is 5. Our trie will look like this
 ![Alt text](src/test/resources/org/example/trie.jpg?raw=true "Title")
+
+
 When we process aaa, we receive at the third "a" node.
 Our path traced so far is "aaa" and the longest prefix from the node is "ad".
 Thus, our answer will be "aaa" + "ad" = "aaaad".
