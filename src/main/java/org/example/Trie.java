@@ -21,15 +21,26 @@ public class Trie {
     public void BuildTrie(List<String> prefixes) {
         for(String word : prefixes) {
             //Check if word is null or empty before adding to the trie.
-            if(word != null && !word.trim().isEmpty()) {
+            if(!isNullOrEmpty(word)) {
                 addNode(word, 0, root);
             }
         }
     }
 
+    public void BuildTrie(String prefix) {
+        //Check if word is null or empty before adding to the trie.
+        if(!isNullOrEmpty(prefix)) {
+            addNode(prefix, 0, root);
+        }
+    }
+
+    boolean isNullOrEmpty(String word) {
+        return word == null || word.trim().isEmpty();
+    }
+
     public int getLongestPrefix(String word) {
         ////Check if word is null or empty before processing.
-        if(word == null || word.trim().isEmpty()) {
+        if(isNullOrEmpty(word)) {
             return 0;
         }
 
@@ -51,23 +62,20 @@ public class Trie {
     }
 
     public void addNode(String str, int index, TrieNode currentNode){
-
-        //This means that we are the leaf node and the height of the leaf node is 1.
+        //This means that we are at the leaf node and the height of the leaf node is 1.
         if(index == str.length()) {
             currentNode.setHeight(1);
             return;
         }
         Character ch = str.charAt(index);
 
-
         if(!currentNode.getChildren().containsKey(ch)) {
             TrieNode childNode = new TrieNode((ch));
             currentNode.addChildren(childNode);
         }
-
         addNode(str, index + 1, currentNode.getChildren().get(ch));
 
-        //There can be multiple words ending from a given node.
+        // There can be multiple words ending from a given node.
         // While traversing, we set the height of the node to the maximum of its children.
         currentNode.setHeight(Math.max(currentNode.getHeight(), 1 + currentNode.getChildren().get(ch).getHeight()));
     }
