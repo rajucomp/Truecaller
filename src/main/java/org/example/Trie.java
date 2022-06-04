@@ -2,18 +2,16 @@ package org.example;
 
 import java.util.*;
 
-public class Trie {
-    private TrieNode root;
-
+public class Trie extends AbstractTrie {
     public Trie() {
-        root = new TrieNode('#');
+        super('#');
         root.setHeight(0);
     }
 
     public void BuildTrie(List<String> prefixes) {
         for(String word : prefixes) {
             //Check if word is null or empty before adding to the trie.
-            if(!isNullOrEmpty(word)) {
+            if(!StringUtilityFunctions.isNullOrEmpty(word)) {
                 addNode(word, 0, root);
             }
         }
@@ -21,18 +19,14 @@ public class Trie {
 
     public void BuildTrie(String prefix) {
         //Check if word is null or empty before adding to the trie.
-        if(!isNullOrEmpty(prefix)) {
+        if(!StringUtilityFunctions.isNullOrEmpty(prefix)) {
             addNode(prefix, 0, root);
         }
     }
 
-    boolean isNullOrEmpty(String word) {
-        return word == null || word.trim().isEmpty();
-    }
-
     public int getLongestPrefix(String word) {
         ////Check if word is null or empty before processing.
-        if(isNullOrEmpty(word)) {
+        if(StringUtilityFunctions.isNullOrEmpty(word)) {
             return 0;
         }
 
@@ -44,7 +38,7 @@ public class Trie {
         List<Integer> longestPrefixes = new ArrayList<>();
         for(String word : words) {
             ////Check if word is null or empty before processing.
-            if(isNullOrEmpty(word)) {
+            if(StringUtilityFunctions.isNullOrEmpty(word)) {
                 longestPrefixes.add(0);
                 continue;
             }
@@ -67,7 +61,7 @@ public class Trie {
         return 0;
     }
 
-    public void addNode(String str, int index, TrieNode currentNode){
+    void addNode(String str, int index, TrieNode currentNode){
         //This means that we are at the leaf node and the height of the leaf node is 1.
         if(index == str.length()) {
             currentNode.setHeight(1);

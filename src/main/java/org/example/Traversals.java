@@ -30,7 +30,7 @@ public class Traversals {
         List<List<TrieNode>> levelOrderTraversalList = getLevelOrderTraversal(root);
         for(List<TrieNode> currentLevel : levelOrderTraversalList) {
             for(TrieNode node : currentLevel) {
-                System.out.print(node.getVal() + "," + node.getHeight() + " " );
+                System.out.print(node.getVal() + " ");
             }
             System.out.println();
         }

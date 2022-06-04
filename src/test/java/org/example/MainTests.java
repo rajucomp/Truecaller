@@ -21,7 +21,7 @@ public class MainTests {
 
 
         //Act
-        Trie trie = new Trie();
+        AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
 
         //Assert
@@ -48,7 +48,7 @@ public class MainTests {
         input.add("21");
 
         //Act
-        Trie trie = new Trie();
+        AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
         //Traversals.Display(trie.getRoot());
 
@@ -68,7 +68,7 @@ public class MainTests {
         input.add(" ");
 
         //Act
-        Trie trie = new Trie();
+        AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
 
 
@@ -88,7 +88,7 @@ public class MainTests {
         input.add("21");
 
         //Act
-        Trie trie = new Trie();
+        AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
         //Traversals.Display(trie.getRoot());
 
@@ -108,7 +108,7 @@ public class MainTests {
         input.add("aaaAd");
 
         //Act
-        Trie trie = new Trie();
+        AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
         //Traversals.Display(trie.getRoot());
 
@@ -137,7 +137,7 @@ public class MainTests {
         testCases.add(""); // 0
 
         //Act
-        Trie trie = new Trie();
+        AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
         trie.BuildTrie("abd");
         trie.BuildTrie("");
