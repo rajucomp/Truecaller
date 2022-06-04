@@ -3,6 +3,8 @@ package org.example;
 import java.util.*;
 
 public class Traversals {
+
+    //Returns a level order traversal of the trie.
     static List<List<TrieNode>>  getLevelOrderTraversal(TrieNode root) {
         List<List<TrieNode>> levelOrderTraversalList = new ArrayList<>();
         Queue<TrieNode> queue = new LinkedList<>();
@@ -23,6 +25,7 @@ public class Traversals {
         return levelOrderTraversalList;
     }
 
+    //Displays the level order traversal of the trie.
     public static void Display(TrieNode root) {
         List<List<TrieNode>> levelOrderTraversalList = getLevelOrderTraversal(root);
         for(List<TrieNode> currentLevel : levelOrderTraversalList) {
