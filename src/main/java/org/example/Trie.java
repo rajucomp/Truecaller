@@ -33,7 +33,6 @@ public class Trie {
 
         int longestPrefix = getLongestPrefix(word, 0, root);
         return longestPrefix >= word.length() ? longestPrefix - 1 : 0;
-        //return getLongestPrefix(word, 0, root) - 1;
     }
 
     int getLongestPrefix(String word, int index, TrieNode currentNode) {
