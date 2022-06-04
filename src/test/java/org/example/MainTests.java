@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTests {
@@ -72,9 +73,9 @@ public class MainTests {
 
 
         //Assert
-        assertEquals(trie.getLongestPrefix(""), 0); //4
-        assertEquals(trie.getLongestPrefix(" "), 0); //4
-        assertEquals(trie.getLongestPrefix(null), 0); //4
+        assertEquals(trie.getLongestPrefix(""), 0); //0
+        assertEquals(trie.getLongestPrefix(" "), 0); //0
+        assertEquals(trie.getLongestPrefix(null), 0); //0
     }
 
     @Test
@@ -113,9 +114,46 @@ public class MainTests {
 
 
         //Assert
-        assertEquals(5, trie.getLongestPrefix("aaa")); //0
+        assertEquals(5, trie.getLongestPrefix("aaa")); //5
         assertEquals(0, trie.getLongestPrefix("Aaa")); //0
-        assertEquals(5, trie.getLongestPrefix("aaaA")); //0
+        assertEquals(5, trie.getLongestPrefix("aaaA")); //5
+    }
+
+    @Test
+    public void testForMultipleInputs() {
+        //Arrange
+        List<String> input = new ArrayList<>();
+        input.add("aaaa");
+        input.add("aaaAd");
+
+        List<String> testCases = new ArrayList<>();
+        testCases.add("a"); // 5
+        testCases.add("aaa"); // 5
+        testCases.add("Aaa"); // 0
+        testCases.add("aaaA"); // 5
+        testCases.add("ab"); // 3
+        testCases.add(null); // 0
+        testCases.add(" "); // 0
+        testCases.add(""); // 0
+
+        //Act
+        Trie trie = new Trie();
+        trie.BuildTrie(input);
+        trie.BuildTrie("abd");
+        trie.BuildTrie("");
+        trie.BuildTrie(" ");
+
+        //Assert
+        List<Integer> testCasesResult = new ArrayList<>();
+        testCasesResult.add(5);
+        testCasesResult.add(5);
+        testCasesResult.add(0);
+        testCasesResult.add(5);
+        testCasesResult.add(3);
+        testCasesResult.add(0);
+        testCasesResult.add(0);
+        testCasesResult.add(0);
+        assertArrayEquals(new List[]{testCasesResult}, new List[]{trie.getLongestPrefixes(testCases)});
     }
 
 }
