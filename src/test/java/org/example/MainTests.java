@@ -21,17 +21,20 @@ public class MainTests {
         AbstractTrie trie = new Trie();
         trie.BuildTrie(input);
 
+        System.out.println();
+
         //Assert
-        assertEquals(trie.getLongestPrefix("a"), 5); // 5
-        assertEquals(trie.getLongestPrefix("aaa"), 5); // 5
-        assertEquals(trie.getLongestPrefix("aaaa"), 4); // 4
-        assertEquals(trie.getLongestPrefix("aaad"), 5); // 5
-        assertEquals(trie.getLongestPrefix("12"), 8); // 8
-        assertEquals(trie.getLongestPrefix("1"), 8); // 8
-        assertEquals(trie.getLongestPrefix("121"), 8); // 8
-        assertEquals(trie.getLongestPrefix("1214"), 8); // 8
-        assertEquals(trie.getLongestPrefix("12142"), 8); // 8
-        assertEquals(trie.getLongestPrefix("12145"), 5); // 5
+        assertEquals("aaade", trie.getLongestPrefix("a"));
+        assertEquals("aaade", trie.getLongestPrefix("aaa"));
+        assertEquals("aaaa", trie.getLongestPrefix("aaaa"));
+        assertEquals("aaade", trie.getLongestPrefix("aaad"));
+        assertEquals("12142345", trie.getLongestPrefix("12"));
+        assertEquals("12142345", trie.getLongestPrefix("1"));
+        assertEquals("12142345", trie.getLongestPrefix("121"));
+        assertEquals("12142345", trie.getLongestPrefix("1214"));
+        assertEquals("12142345", trie.getLongestPrefix("12142"));
+        assertEquals("12145", trie.getLongestPrefix("12145"));
+        assertEquals("123", trie.getLongestPrefix("123"));
     }
 
     @Test
@@ -49,9 +52,9 @@ public class MainTests {
         trie.BuildTrie(input);
 
         //Assert
-        assertEquals(trie.getLongestPrefix("aaaa"), 4); //4
-        assertEquals(trie.getLongestPrefix("aaa"), 5); // 5
-        assertEquals(trie.getLongestPrefix("a"), 9); // 9
+        assertEquals("aaaa", trie.getLongestPrefix("aaaa"));
+        assertEquals("aaade", trie.getLongestPrefix("aaa"));
+        assertEquals("abcdefghi", trie.getLongestPrefix("a"));
     }
 
     @Test
@@ -67,9 +70,9 @@ public class MainTests {
         trie.BuildTrie(input);
 
         //Assert
-        assertEquals(trie.getLongestPrefix(""), 0); //0
-        assertEquals(trie.getLongestPrefix(" "), 0); //0
-        assertEquals(trie.getLongestPrefix(null), 0); //0
+        assertEquals(trie.getLongestPrefix(""), "");
+        assertEquals(trie.getLongestPrefix(" "), "");
+        assertEquals(trie.getLongestPrefix(null), "");
     }
 
     @Test
@@ -86,10 +89,10 @@ public class MainTests {
         trie.BuildTrie(input);
 
         //Assert
-        assertEquals(0, trie.getLongestPrefix("aaadbhfbhdsaa")); //0
-        assertEquals(0, trie.getLongestPrefix("v")); // 0
-        assertEquals(0, trie.getLongestPrefix("rerre223")); // 0
-        assertEquals(0, trie.getLongestPrefix("aaaaa")); // 0
+        assertEquals("", trie.getLongestPrefix("aaadbhfbhdsaa"));
+        assertEquals("", trie.getLongestPrefix("v"));
+        assertEquals("", trie.getLongestPrefix("rerre223"));
+        assertEquals("", trie.getLongestPrefix("aaaaa"));
     }
 
     @Test
@@ -104,9 +107,9 @@ public class MainTests {
         trie.BuildTrie(input);
 
         //Assert
-        assertEquals(5, trie.getLongestPrefix("aaa")); //5
-        assertEquals(0, trie.getLongestPrefix("Aaa")); //0
-        assertEquals(5, trie.getLongestPrefix("aaaA")); //5
+        assertEquals("aaaAd", trie.getLongestPrefix("aaa"));
+        assertEquals("", trie.getLongestPrefix("Aaa"));
+        assertEquals("aaaAd", trie.getLongestPrefix("aaaA"));
     }
 
     @Test
@@ -117,14 +120,14 @@ public class MainTests {
         input.add("aaaAd");
 
         List<String> testCases = new ArrayList<>();
-        testCases.add("a"); // 5
-        testCases.add("aaa"); // 5
-        testCases.add("Aaa"); // 0
-        testCases.add("aaaA"); // 5
-        testCases.add("ab"); // 3
-        testCases.add(null); // 0
-        testCases.add(" "); // 0
-        testCases.add(""); // 0
+        testCases.add("a");
+        testCases.add("aaa");
+        testCases.add("Aaa");
+        testCases.add("aaaA");
+        testCases.add("ab");
+        testCases.add(null);
+        testCases.add(" ");
+        testCases.add("");
 
         //Act
         AbstractTrie trie = new Trie();
@@ -134,15 +137,15 @@ public class MainTests {
         trie.BuildTrie(" ");
 
         //Assert
-        List<Integer> testCasesResult = new ArrayList<>();
-        testCasesResult.add(5);
-        testCasesResult.add(5);
-        testCasesResult.add(0);
-        testCasesResult.add(5);
-        testCasesResult.add(3);
-        testCasesResult.add(0);
-        testCasesResult.add(0);
-        testCasesResult.add(0);
+        List<String> testCasesResult = new ArrayList<>();
+        testCasesResult.add("aaaAd");
+        testCasesResult.add("aaaAd");
+        testCasesResult.add("");
+        testCasesResult.add("aaaAd");
+        testCasesResult.add("abd");
+        testCasesResult.add("");
+        testCasesResult.add("");
+        testCasesResult.add("");
         assertArrayEquals(new List[]{testCasesResult}, new List[]{trie.getLongestPrefixes(testCases)});
     }
 

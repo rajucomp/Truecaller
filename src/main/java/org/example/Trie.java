@@ -5,12 +5,10 @@ import java.util.*;
 public class Trie extends AbstractTrie {
     public Trie() {
         super('#');
-        root.setHeight(0);
     }
 
     public void BuildTrie(List<String> prefixes) {
         for(String word : prefixes) {
-            //Check if word is null or empty before adding to the trie.
             if(!StringUtilityFunctions.isNullOrEmpty(word)) {
                 addNode(word, 0, root);
             }
@@ -18,53 +16,54 @@ public class Trie extends AbstractTrie {
     }
 
     public void BuildTrie(String prefix) {
-        //Check if word is null or empty before adding to the trie.
         if(!StringUtilityFunctions.isNullOrEmpty(prefix)) {
             addNode(prefix, 0, root);
         }
     }
 
-    public int getLongestPrefix(String word) {
-        ////Check if word is null or empty before processing.
+    public String getLongestPrefix(String word) {
         if(StringUtilityFunctions.isNullOrEmpty(word)) {
-            return 0;
+            return "";
         }
 
-        int longestPrefix = getLongestPrefix(word, 0, root);
-        return longestPrefix >= word.length() ? longestPrefix - 1 : 0;
+        StringBuilder longestPrefix = getLongestPrefix(word, 0, root);
+        return longestPrefix.length() >= word.length() ? longestPrefix.toString() : "";
     }
 
-    public List<Integer> getLongestPrefixes(List<String> words) {
-        List<Integer> longestPrefixes = new ArrayList<>();
+    public List<String> getLongestPrefixes(List<String> words) {
+        List<String> longestPrefixes = new ArrayList<>();
         for(String word : words) {
-            ////Check if word is null or empty before processing.
             if(StringUtilityFunctions.isNullOrEmpty(word)) {
-                longestPrefixes.add(0);
+                longestPrefixes.add("");
                 continue;
             }
-            int longestPrefix = getLongestPrefix(word, 0, root);
-            longestPrefixes.add(longestPrefix >= word.length() ? longestPrefix - 1 : 0);
+            StringBuilder longestPrefix = getLongestPrefix(word, 0, root);
+            longestPrefixes.add(longestPrefix.length() >= word.length() ? longestPrefix.toString() : "");
         }
         return longestPrefixes;
     }
 
-    int getLongestPrefix(String word, int index, TrieNode currentNode) {
+    StringBuilder getLongestPrefix(String word, int index, TrieNode currentNode) {
         if(index == word.length()) {
             //System.out.println(currentNode.getVal() + " " + currentNode.getHeight());
-            return currentNode.getHeight();
+            return currentNode.getMaxPrefix();
         }
 
         Character ch = word.charAt(index);
+
         if(currentNode.getChildren().containsKey(ch)) {
-            return 1 + getLongestPrefix(word, index + 1, currentNode.getChildren().get(ch));
+            StringBuilder sb = new StringBuilder();
+            sb.append(ch);
+            sb.append(getLongestPrefix(word, index + 1, currentNode.getChildren().get(ch)));
+            return sb;
         }
-        return 0;
+        return new StringBuilder();
     }
 
     void addNode(String str, int index, TrieNode currentNode){
         //This means that we are at the leaf node and the height of the leaf node is 1.
         if(index == str.length()) {
-            currentNode.setHeight(1);
+            currentNode.setMaxPrefix(new StringBuilder(str.charAt(index - 1)));
             return;
         }
         Character ch = str.charAt(index);
@@ -73,11 +72,18 @@ public class Trie extends AbstractTrie {
             TrieNode childNode = new TrieNode((ch));
             currentNode.addChildren(childNode);
         }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(ch);
         addNode(str, index + 1, currentNode.getChildren().get(ch));
 
         // There can be multiple words ending from a given node.
-        // While traversing, we set the height of the node to the maximum of its children.
-        currentNode.setHeight(Math.max(currentNode.getHeight(), 1 + currentNode.getChildren().get(ch).getHeight()));
+        // While traversing, we set the max prefix of the node to the maximum of its children.
+        sb.append(currentNode.getChildren().get(ch).getMaxPrefix());
+
+        if(sb.length() > currentNode.getMaxPrefix().length()) {
+            currentNode.setMaxPrefix(sb);
+        }
     }
 
     public String serialise() {
