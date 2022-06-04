@@ -1,6 +1,13 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+
+import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +15,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTests {
 
-    @Test
-    public void testForInputFromTextFile() {
+    List<String> getPrefixesFromInputFile(String filePath) throws Exception{
+        File inputFile = new File(this.getClass().getResource(filePath).getFile());
+        //System.out.println("Hello " + inputFile.getAbsolutePath());
 
+        List<String> prefixes = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                prefixes.add(line);
+            }
+        }
+        catch(Exception ex) {
+            throw new Exception("Error occurred while parsing the input.");
+        }
+        return prefixes;
+    }
+
+    @Test
+    public void testForInputFromTextFile() throws Exception{
+        //Arrange
+        List<String> prefixes = getPrefixesFromInputFile("/org/example/input.txt");
+
+        //Act
+        AbstractTrie trie = new Trie();
+        trie.BuildTrie(prefixes);
+
+        //Assert
+        assertEquals("KAWeqI", trie.getLongestPrefix("KA"));
     }
     @Test
     public void testForCorrectInputs() {
