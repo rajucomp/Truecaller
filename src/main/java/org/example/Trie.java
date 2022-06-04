@@ -48,6 +48,20 @@ public class Trie {
         return longestPrefix >= word.length() ? longestPrefix - 1 : 0;
     }
 
+    public List<Integer> getLongestPrefixes(List<String> words) {
+        List<Integer> longestPrefixes = new ArrayList<>();
+        for(String word : words) {
+            ////Check if word is null or empty before processing.
+            if(isNullOrEmpty(word)) {
+                longestPrefixes.add(0);
+                continue;
+            }
+            int longestPrefix = getLongestPrefix(word, 0, root);
+            longestPrefixes.add(longestPrefix >= word.length() ? longestPrefix - 1 : 0);
+        }
+        return longestPrefixes;
+    }
+
     int getLongestPrefix(String word, int index, TrieNode currentNode) {
         if(index == word.length()) {
             //System.out.println(currentNode.getVal() + " " + currentNode.getHeight());
