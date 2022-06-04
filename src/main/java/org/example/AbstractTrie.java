@@ -17,6 +17,5 @@ public abstract class AbstractTrie {
     abstract void BuildTrie(String prefix);
     abstract String getLongestPrefix(String word);
     abstract List<String> getLongestPrefixes(List<String> words);
-    abstract String serialise();
     abstract void clear();
 }

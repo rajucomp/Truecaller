@@ -7,6 +7,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTests {
+
+    @Test
+    public void testForInputFromTextFile() {
+
+    }
     @Test
     public void testForCorrectInputs() {
         //Arrange
@@ -89,10 +94,10 @@ public class MainTests {
         trie.BuildTrie(input);
 
         //Assert
-        assertEquals("", trie.getLongestPrefix("aaadbhfbhdsaa"));
+        assertEquals("aaad", trie.getLongestPrefix("aaadbhfbhdsaa"));
         assertEquals("", trie.getLongestPrefix("v"));
         assertEquals("", trie.getLongestPrefix("rerre223"));
-        assertEquals("", trie.getLongestPrefix("aaaaa"));
+        assertEquals("aaaa", trie.getLongestPrefix("aaaaa"));
     }
 
     @Test
@@ -163,66 +168,5 @@ public class MainTests {
 
         //Assert
         assertEquals(0, trie.getRoot().getSize());
-    }
-
-    @Test
-    public void testForValidSerialisation() {
-        //Arrange
-        List<String> input = new ArrayList<>();
-        input.add("aaa");
-        //input.add("aab");
-        //input.add("aac");
-        //input.add("aad");
-        //input.add("aae");
-
-        //Act
-        AbstractTrie trie = new Trie();
-        trie.BuildTrie(input);
-
-        //Assert
-        String expectedSerialisedTrie = "#[a[a[a[]]]]";
-        assertEquals(expectedSerialisedTrie, trie.serialise());
-    }
-
-    @Test
-    public void testForValidDeserialisation() {
-        //Arrange
-        String serialisedTrie = "#[a[a[a[]]]]";
-
-        //Act
-        AbstractTrie trie = Traversals.deserialise(serialisedTrie);
-
-        //Assert
-        assertNull(trie);
-    }
-
-    @Test
-    public void testForNullOrEmptyDeserialisation() {
-        //Arrange
-        String spaceSerialisedTrie = " ";
-        String emptySerialisedTrie = " ";
-        String nullSerialisedTrie = " ";
-
-        //Act
-        AbstractTrie spaceTrie = Traversals.deserialise(spaceSerialisedTrie);
-        AbstractTrie emptyTrie = Traversals.deserialise(emptySerialisedTrie);
-        AbstractTrie nullTrie = Traversals.deserialise(nullSerialisedTrie);
-
-        //Assert
-        assertNull(spaceTrie);
-        assertNull(emptyTrie);
-        assertNull(nullTrie);
-    }
-
-    @Test
-    public void testForNullNodeSerialisation() {
-        //Arrange
-        AbstractTrie nullTrie = new Trie();
-
-        //Act
-        String serialisedTrie = nullTrie.serialise();
-
-        //Assert
-        assertEquals("#[]", serialisedTrie);
     }
 }

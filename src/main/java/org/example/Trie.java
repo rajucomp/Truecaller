@@ -27,7 +27,7 @@ public class Trie extends AbstractTrie {
         }
 
         StringBuilder longestPrefix = getLongestPrefix(word, 0, root);
-        return longestPrefix.length() >= word.length() ? longestPrefix.toString() : "";
+        return longestPrefix.length() != 0 ? longestPrefix.toString() : "";
     }
 
     public List<String> getLongestPrefixes(List<String> words) {
@@ -38,7 +38,7 @@ public class Trie extends AbstractTrie {
                 continue;
             }
             StringBuilder longestPrefix = getLongestPrefix(word, 0, root);
-            longestPrefixes.add(longestPrefix.length() >= word.length() ? longestPrefix.toString() : "");
+            longestPrefixes.add(longestPrefix.length() != 0 ? longestPrefix.toString() : "");
         }
         return longestPrefixes;
     }
@@ -84,10 +84,6 @@ public class Trie extends AbstractTrie {
         if(sb.length() > currentNode.getMaxPrefix().length()) {
             currentNode.setMaxPrefix(sb);
         }
-    }
-
-    public String serialise() {
-        return Traversals.serialise(root);
     }
 
     public void clear() {
