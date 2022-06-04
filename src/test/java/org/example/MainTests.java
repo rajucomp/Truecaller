@@ -99,4 +99,23 @@ public class MainTests {
         assertEquals(0, trie.getLongestPrefix("aaaaa")); // 0
     }
 
+    @Test
+    public void testForUpperCaseAndLowerCaseInputs() {
+        //Arrange
+        List<String> input = new ArrayList<>();
+        input.add("aaaa");
+        input.add("aaaAd");
+
+        //Act
+        Trie trie = new Trie();
+        trie.BuildTrie(input);
+        //Traversals.Display(trie.getRoot());
+
+
+        //Assert
+        assertEquals(5, trie.getLongestPrefix("aaa")); //0
+        assertEquals(0, trie.getLongestPrefix("Aaa")); //0
+        assertEquals(5, trie.getLongestPrefix("aaaA")); //0
+    }
+
 }

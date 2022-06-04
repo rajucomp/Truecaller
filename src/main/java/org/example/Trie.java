@@ -37,7 +37,7 @@ public class Trie {
 
     int getLongestPrefix(String word, int index, TrieNode currentNode) {
         if(index == word.length()) {
-            System.out.println(currentNode.getVal() + " " + currentNode.getHeight());
+            //System.out.println(currentNode.getVal() + " " + currentNode.getHeight());
             return currentNode.getHeight();
         }
         Character ch = word.charAt(index);
