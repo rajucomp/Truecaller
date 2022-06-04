@@ -43,6 +43,8 @@ public class MainTests {
 
         //Assert
         assertEquals("KAWeqI", trie.getLongestPrefix("KA"));
+        assertEquals("8dLfGZU0T", trie.getLongestPrefix("8"));
+        assertEquals("8AaaqkXQ", trie.getLongestPrefix("8A"));
     }
     @Test
     public void testForCorrectInputs() {
