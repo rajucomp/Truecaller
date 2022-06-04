@@ -5,8 +5,18 @@ import java.util.*;
 public class TrieNode {
     private Character val;
 
+    public int getSize() {
+        return children.size();
+    }
+
+    private int size;
+
     public Character getVal() {
         return val;
+    }
+
+    public void setVal(Character val) {
+        this.val = val;
     }
 
     private int height;
@@ -31,6 +41,10 @@ public class TrieNode {
 
     public Map<Character, TrieNode> getChildren() {
         return children;
+    }
+
+    public void setChildren(Map<Character, TrieNode> children) {
+        this.children = children;
     }
 }
 

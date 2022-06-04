@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTests {
 
@@ -154,6 +153,51 @@ public class MainTests {
         testCasesResult.add(0);
         testCasesResult.add(0);
         assertArrayEquals(new List[]{testCasesResult}, new List[]{trie.getLongestPrefixes(testCases)});
+    }
+
+    @Test
+    public void testClearMethod() {
+        //Arrange
+        List<String> input = new ArrayList<>();
+        input.add("aaaa");
+        input.add("aaaAd");
+
+        //Act
+        AbstractTrie trie = new Trie();
+        trie.BuildTrie(input);
+        trie.clear();
+        assertEquals(0, trie.getRoot().getSize());
+    }
+
+    @Test
+    public void testSerialisation() {
+        //Arrange
+        List<String> input = new ArrayList<>();
+        input.add("aaa");
+        //input.add("aab");
+        //input.add("aac");
+        //input.add("aad");
+        //input.add("aae");
+
+        //Act
+        AbstractTrie trie = new Trie();
+        trie.BuildTrie(input);
+
+        //Assert
+        String expectedSerialisedTrie = "#[a[a[a[]]]]";
+        assertEquals(expectedSerialisedTrie, trie.serialise());
+    }
+
+    @Test
+    public void testDeserilaisation() {
+        //Arrange
+        String serialisedTrie = "#[a[a[a[]]]]";
+
+        //Act
+        AbstractTrie trie = Traversals.deserialise(serialisedTrie);
+
+        //Assert
+        assertNull(trie);
     }
 
 }

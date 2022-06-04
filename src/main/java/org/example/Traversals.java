@@ -4,35 +4,20 @@ import java.util.*;
 
 public class Traversals {
 
-    //Returns a level order traversal of the trie.
-    static List<List<TrieNode>>  getLevelOrderTraversal(TrieNode root) {
-        List<List<TrieNode>> levelOrderTraversalList = new ArrayList<>();
-        Queue<TrieNode> queue = new LinkedList<>();
-
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            int size = queue.size();
-            List<TrieNode> currentLevel = new ArrayList<>();
-            for(int i = 0; i < size; i++) {
-                TrieNode currentNode = queue.poll();
-                currentLevel.add(currentNode);
-                for(Map.Entry<Character, TrieNode> entry : currentNode.getChildren().entrySet()) {
-                    queue.offer(entry.getValue());
-                }
-            }
-            levelOrderTraversalList.add(currentLevel);
+    public static String serialise(TrieNode root) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(root.getVal());
+        sb.append('[');
+        for(TrieNode childNode : root.getChildren().values()) {
+            sb.append(serialise(childNode));
         }
-        return levelOrderTraversalList;
+        sb.append(']');
+        return sb.toString();
     }
 
-    //Displays the level order traversal of the trie.
-    public static void Display(TrieNode root) {
-        List<List<TrieNode>> levelOrderTraversalList = getLevelOrderTraversal(root);
-        for(List<TrieNode> currentLevel : levelOrderTraversalList) {
-            for(TrieNode node : currentLevel) {
-                System.out.print(node.getVal() + " ");
-            }
-            System.out.println();
-        }
+    public static AbstractTrie deserialise(String serlialisedTree) {
+        AbstractTrie trie = new Trie();
+        trie.getRoot().setVal(serlialisedTree.charAt(0));
+        return null;
     }
 }

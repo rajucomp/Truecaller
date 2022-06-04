@@ -79,4 +79,14 @@ public class Trie extends AbstractTrie {
         // While traversing, we set the height of the node to the maximum of its children.
         currentNode.setHeight(Math.max(currentNode.getHeight(), 1 + currentNode.getChildren().get(ch).getHeight()));
     }
+
+    public String serialise() {
+        return Traversals.serialise(root);
+    }
+
+    public void clear() {
+        root.setChildren(new HashMap<>());
+    }
+
+
 }
